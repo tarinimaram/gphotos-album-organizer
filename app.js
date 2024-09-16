@@ -1,22 +1,17 @@
 const express = require('express');
 const app = express();
+var path = require('path');
 const port = 3000;
 
-app.use(express.json());
-app.use(express.static('public'));
+app.set('views', path.join('gphotos-album-organizer/views'));
+// Set EJS as the view engine
+app.set('view engine', 'ejs');
 
-// Define a route for the homepage
+// Route to render the EJS view
 app.get('/', (req, res) => {
-  res.send('Hello World!');
+  res.render('index', { title: 'My Web App' });
 });
 
-// about page
-app.get('/about', (req, res) => {
-    res.send('This is the about page.');
-});
-
-// Start the server
 app.listen(port, () => {
   console.log(`Server running at http://localhost:${port}/`);
 });
-
